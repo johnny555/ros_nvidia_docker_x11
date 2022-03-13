@@ -1,0 +1,6 @@
+{
+    "dockerComposeFile": "docker-compose.yml",
+    "workspaceFolder": "/ros_workshop",
+    "service": "dev",
+    "remoteUser": "vscode"
+}

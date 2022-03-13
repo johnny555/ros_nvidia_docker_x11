@@ -1,0 +1,19 @@
+services:
+  dev:
+    build: .
+    tty: true
+    environment:
+      - DISPLAY
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - QT_X11_NO_MITSHM=1
+    volumes:
+      - type: bind
+        source: /home/john/.Xauthority
+        target: /root/.Xauthority
+      - type: bind         
+        source: /tmp/.X11-unix
+        target: /tmp/.X11-unix
+      - type: bind
+        source: /home/john/ros_workshop/
+        target: /ros_workshop
+    
