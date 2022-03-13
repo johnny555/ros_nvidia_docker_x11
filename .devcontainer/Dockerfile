@@ -12,6 +12,7 @@ FROM nvidia/cudagl:11.4.2-base-ubuntu20.04
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 ENV ROS_DISTRO noetic
+ENV Username vscode
 
 # Minimal setup
 RUN apt-get update \
@@ -33,8 +34,12 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 RUN rosdep init \
  && rosdep fix-permissions \
  && rosdep update --rosdistro $ROS_DISTRO
-RUN adduser --disabled-password --gecos "" vscode
-RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+RUN adduser --gecos "" vscode \ 
+    && echo vscode ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/vscode \
+    && chmod 0440 /etc/sudoers.d/vscode
+    
+RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc \
+    && echo "source /opt/ros/noetic/setup.bash" >> /home/vscode/.bashrc
 
 
 
